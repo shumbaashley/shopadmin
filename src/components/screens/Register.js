@@ -1,6 +1,32 @@
-import React, { Fragment } from 'react'
+import React, {useState, Fragment } from 'react'
+import {useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { registerUser } from '../../actions/userActions'
+
 
 const Register = () => {
+
+    const [firstname, setFirstName] = useState('')
+    const [lastname, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const [username, setUserName] = useState('')
+    
+    const dispatch = useDispatch()
+    
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        if(password === password2){
+            console.log(firstname, lastname, email, username, password)
+            dispatch(registerUser(firstname, lastname,  username, email, password))
+        }else {
+            alert("Passwords do not match")
+        }
+
+    }
+
     return (
         <Fragment>
 
@@ -16,48 +42,42 @@ const Register = () => {
                             <div className="text-center">
                                 <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form className="user">
+                            <form className="user" onSubmit={(e) => submitHandler(e)}>
                                 <div className="form-group row">
                                     <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" className="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name"/>
+                                        <input onChange={(e) => setFirstName(e.target.value)} type="text" className="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="First Name" required/>
                                     </div>
                                     <div className="col-sm-6">
-                                        <input type="text" className="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name"/>
+                                        <input onChange={(e) => setLastName(e.target.value)} type="text" className="form-control form-control-user" id="exampleLastName"
+                                            placeholder="Last Name" required/>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" className="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address"/>
+                                    <input onChange={(e) => setUserName(e.target.value)} type="text" className="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Username" required/>
+                                </div>
+                                <div className="form-group">
+                                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Email Address" required/>
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" className="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password"/>
+                                        <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password" required/>
                                     </div>
                                     <div className="col-sm-6">
-                                        <input type="password" className="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password"/>
+                                        <input onChange={(e) => setPassword2(e.target.value)} type="password" className="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Repeat Password" required/>
                                     </div>
                                 </div>
-                                <a href="login.html" className="btn btn-primary btn-user btn-block">
+                                <button type="submit" className="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
-                                <hr/>
-                                <a href="index.html" className="btn btn-google btn-user btn-block">
-                                    <i className="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                                    <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                </button>
                             </form>
                             <hr/>
                             <div className="text-center">
-                                <a className="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div className="text-center">
-                                <a className="small" href="login.html">Already have an account? Login!</a>
+                                <Link className="small" to="/login">Already have an account? Login!</Link>
                             </div>
                         </div>
                     </div>
