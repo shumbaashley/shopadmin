@@ -5,9 +5,13 @@ import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import Modal from '../modal/Modal'
 import Sidebar from '../sidebar/Sidebar'
+import Charts from "../screens/Charts";
+import Tables from "../screens/Tables";
+import Home from "../screens/Home";
+import { Route } from 'react-router-dom';
 
 
-const Layout = ({history}) => {
+const DashboardContainer = ({history}) => {
 
     const dispatch = useDispatch()
 
@@ -15,11 +19,11 @@ const Layout = ({history}) => {
 
     const {userInfo, loading, error} = userLogin
 
-    // useEffect(() => {
-    //     if(!userInfo){
-    //         history.push('/login')
-    //     }
-    // }, [history, userInfo])
+    useEffect(() => {
+        if(!userInfo){
+            history.push('/login')
+        }
+    }, [history, userInfo])
 
     const logoutHandler = () => {
         dispatch(logoutUser())
@@ -43,7 +47,10 @@ const Layout = ({history}) => {
 
                     {/* Different Screens */}
 
-                    {/* ======================= */}
+                    
+                    <Route exact path="/" component={Home}/>
+                    <Route exact path="/tables" component={Tables}/>
+                    <Route exact path="/charts" component={Charts}/>
 
                     {/* Different Screens */}
                     
@@ -72,4 +79,4 @@ const Layout = ({history}) => {
     )
 }
 
-export default Layout
+export default DashboardContainer
