@@ -1,35 +1,21 @@
-import React, { useEffect, Fragment } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { logoutUser } from '../../actions/userActions'
+import React, { Fragment } from 'react'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import Sidebar from '../sidebar/Sidebar'
-
+import {Link} from 'react-router-dom'
 
 const Home = ({history}) => {
 
-    const dispatch = useDispatch()
-
-    const userLogin = useSelector(state => state.userLogin)
-
-    const {userInfo, loading, error} = userLogin
-
-    // useEffect(() => {
-    //     if(!userInfo){
-    //         history.push('/login')
-    //     }
-    // }, [history, userInfo])
-
     const logoutHandler = () => {
-        dispatch(logoutUser())
+        console.log("Logout")
     }
     return (
         <Fragment>
                    {/* <!-- Page Heading --> */}
                     <div className="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <Link to="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                className="fas fa-download fa-sm text-white-50"></i> Generate Report</Link>
                     </div>
 
                     {/* <!-- Content Row --> */}

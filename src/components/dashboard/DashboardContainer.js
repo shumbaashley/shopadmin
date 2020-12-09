@@ -1,6 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { logoutUser } from '../../actions/userActions'
+import React, {  Fragment } from 'react'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import Modal from '../modal/Modal'
@@ -13,20 +11,9 @@ import { Route } from 'react-router-dom';
 
 const DashboardContainer = ({history}) => {
 
-    const dispatch = useDispatch()
-
-    const userLogin = useSelector(state => state.userLogin)
-
-    const {userInfo, loading, error} = userLogin
-
-    useEffect(() => {
-        if(!userInfo){
-            history.push('/login')
-        }
-    }, [history, userInfo])
 
     const logoutHandler = () => {
-        dispatch(logoutUser())
+        console.log("Logout")
     }
     return (
         <Fragment>

@@ -1,7 +1,5 @@
-import React, {useState, useEffect, Fragment } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, {useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { registerUser } from '../../actions/userActions'
 
 
 const Register = ({history, location}) => {
@@ -12,26 +10,11 @@ const Register = ({history, location}) => {
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
     const [username, setUserName] = useState('')
-    
-    const dispatch = useDispatch()
-    
-    const userRegister = useSelector(state => state.userRegister)
-
-    const {userInfo, loading, error} = userRegister
-
-    const redirect = location.search ? location.search.split('=')[1] : '/'
-
-    useEffect(() => {
-        if(userInfo){
-            history.push(redirect)
-        }
-    }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
         if(password === password2){
             console.log(firstname, lastname, email, username, password)
-            dispatch(registerUser(firstname, lastname,  username, email, password))
         }else {
             alert("Passwords do not match")
         }
