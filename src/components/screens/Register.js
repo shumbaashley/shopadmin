@@ -1,10 +1,10 @@
-import React, {useState, Fragment } from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useState, useEffect, Fragment } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { registerUser } from '../../actions/userActions'
 
 
-const Register = () => {
+const Register = ({history}) => {
 
     const [firstname, setFirstName] = useState('')
     const [lastname, setLastName] = useState('')
@@ -15,6 +15,15 @@ const Register = () => {
     
     const dispatch = useDispatch()
     
+    const userLogin = useSelector(state => state.userLogin)
+
+    const {userInfo, loading, error} = userLogin
+
+    useEffect(() => {
+        if(userInfo){
+            history.push('/')
+        }
+    }, [history, userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()

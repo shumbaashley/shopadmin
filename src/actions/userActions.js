@@ -1,5 +1,5 @@
 import axios from 'axios'
-const { USER_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAIL } = require("../constants/userConstants");
+import { USER_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST, USER_SIGNUP_SUCCESS, USER_SIGNUP_FAIL, USER_LOGOUT } from "../constants/userConstants";
 
 export const loginUser = (email, password) => async dispatch => {
     try {
@@ -21,7 +21,7 @@ export const loginUser = (email, password) => async dispatch => {
             payload : data
         })
 
-        localStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
         dispatch({
             type : USER_LOGIN_FAIL,
@@ -50,11 +50,23 @@ export const registerUser = (firstname, lastname, username, email, password) => 
             payload : data
         })
 
-        localStorage.setItem('user', JSON.stringify(data))
+        dispatch({
+            type : USER_LOGIN_SUCCESS,
+            payload : data
+        })
+
+        localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
         dispatch({
             type : USER_SIGNUP_FAIL,
             payload : error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
+}
+
+export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem('userInfo')
+    dispatch({
+        type : USER_LOGOUT
+    })
 }

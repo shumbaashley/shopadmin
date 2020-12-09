@@ -1,16 +1,21 @@
 import {createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import { loginReducer } from './reducers/userReducers'
+import { loginReducer, signupReducer } from './reducers/userReducers'
 
-const initialState = {
-    
-}
+
 
 
 const reducer = combineReducers({
-    user : loginReducer,
+    userLogin : loginReducer,
+    userRegister : signupReducer,
 })
+
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
+const initialState = {
+    userLogin : {userInfo : userInfoFromStorage},
+}
 
 const middleware = [thunk]
 

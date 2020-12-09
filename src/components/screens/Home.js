@@ -1,6 +1,25 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, Fragment } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import { logoutUser } from '../../actions/userActions'
 
-const Home = () => {
+
+const Home = ({history}) => {
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+
+    const {userInfo, loading, error} = userLogin
+
+    useEffect(() => {
+        if(!userInfo){
+            history.push('/login')
+        }
+    }, [history, userInfo])
+
+    const logoutHandler = () => {
+        dispatch(logoutUser())
+    }
     return (
         <Fragment>
     {/* <!-- Page Wrapper --> */}
@@ -710,7 +729,7 @@ const Home = () => {
                 <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div className="modal-footer">
                     <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a className="btn btn-primary" href="login.html">Logout</a>
+                    <button onClick={logoutHandler} className="btn btn-primary" >Logout</button>
                 </div>
             </div>
         </div>

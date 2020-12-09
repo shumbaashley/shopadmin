@@ -1,19 +1,29 @@
-import React, {useState, Fragment } from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useState, useEffect, Fragment } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loginUser } from '../../actions/userActions'
 
 
-const Login = () => {
+const Login = ({history}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
 
+    const userLogin = useSelector(state => state.userLogin)
+
+    const {userInfo, loading, error} = userLogin
+
+    useEffect(() => {
+        if(userInfo){
+            history.push('/')
+        }
+    }, [history, userInfo])
+
     const submitHandler = (e) => {
         e.preventDefault()
         console.log(email, password)
-        dispatch(loginUser(email, password))
+        dispatch(loginUser(email, password)) 
     }
 
     return (
