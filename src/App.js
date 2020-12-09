@@ -1,6 +1,6 @@
 import Home from "./components/screens/Home";
-import Login from "./components/screens/Login";
-import Register from "./components/screens/Register";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 import Tables from "./components/screens/Tables";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Charts from "./components/screens/Charts";
