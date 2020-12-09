@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { registerUser } from '../../actions/userActions'
 
 
-const Register = ({history}) => {
+const Register = ({history, location}) => {
 
     const [firstname, setFirstName] = useState('')
     const [lastname, setLastName] = useState('')
@@ -15,15 +15,17 @@ const Register = ({history}) => {
     
     const dispatch = useDispatch()
     
-    const userLogin = useSelector(state => state.userLogin)
+    const userRegister = useSelector(state => state.userRegister)
 
-    const {userInfo, loading, error} = userLogin
+    const {userInfo, loading, error} = userRegister
+
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
         if(userInfo){
-            history.push('/')
+            history.push(redirect)
         }
-    }, [history, userInfo])
+    }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()

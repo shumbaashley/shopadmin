@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { loginUser } from '../../actions/userActions'
 
 
-const Login = ({history}) => {
+const Login = ({history, location}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -14,11 +14,14 @@ const Login = ({history}) => {
 
     const {userInfo, loading, error} = userLogin
 
+    const redirect = location.search ? location.search.split('=')[1] : '/'
+
+
     useEffect(() => {
         if(userInfo){
-            history.push('/')
+            history.push(redirect)
         }
-    }, [history, userInfo])
+    }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -61,7 +64,7 @@ const Login = ({history}) => {
                                     </form>
                                     <hr/>
                                     <div className="text-center">
-                                        <Link className="small" to="/register">Create an Account!</Link>
+                                        <Link className="small" to={redirect ? `/register?redirect=${redirect}` : "/register"}>Create an Account!</Link>
                                     </div>
                                 </div>
                             </div>
