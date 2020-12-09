@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react'
+import React, {useState, Fragment } from 'react'
 import {Link} from 'react-router-dom'
 
 const Sidebar = () => {
+    const [toggleSidebar, setToggleSidebar] = useState(false)
+
+    const toggle = toggleSidebar ? "toggled" : "";
+    
     return (
         <Fragment>
             
         {/* <!-- Sidebar --> */}
-        <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul className={`navbar-nav bg-gradient-primary sidebar ${toggle}  sidebar-dark accordion`} id="accordionSidebar">
 
         {/* <!-- Sidebar - Brand --> */}
         <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -55,7 +59,7 @@ const Sidebar = () => {
 
         {/* <!-- Sidebar Toggler (Sidebar) --> */}
         <div className="text-center d-none d-md-inline">
-            <button className="rounded-circle border-0" id="sidebarToggle"></button>
+            <button onClick={() => setToggleSidebar(!toggleSidebar)} className="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
 
         </ul>
