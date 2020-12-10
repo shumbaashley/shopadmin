@@ -1,16 +1,18 @@
 import React, {useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { loginUser } from '../../api/auth'
 
 
 const Login = ({history, location}) => {
 
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
-        console.log(email, password)
+        await loginUser(username, password)
+        console.log(username, password)
     }
 
     return (
@@ -34,9 +36,9 @@ const Login = ({history, location}) => {
                                     </div>
                                     <form className="user" onSubmit={(e) => submitHandler(e)}>
                                         <div className="form-group">
-                                            <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control form-control-user"
+                                            <input onChange={(e) => setUsername(e.target.value)} type="text" className="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." required/>
+                                                placeholder="Enter Username..." required/>
                                         </div>
                                         <div className="form-group">
                                             <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control form-control-user"

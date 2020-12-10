@@ -7,13 +7,14 @@ import Charts from "../screens/Charts";
 import Tables from "../screens/Tables";
 import Home from "../screens/Home";
 import { Route } from 'react-router-dom';
+import { logout } from '../../api/auth'
 
 
 const DashboardContainer = ({history}) => {
 
 
     const logoutHandler = () => {
-        console.log("Logout")
+        logout()
     }
     return (
         <Fragment>
