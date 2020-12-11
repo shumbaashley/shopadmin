@@ -12,7 +12,6 @@ import { logout } from '../../api/auth'
 
 const DashboardContainer = ({history}) => {
 
-
     const logoutHandler = () => {
         logout()
     }

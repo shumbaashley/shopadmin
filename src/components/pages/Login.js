@@ -12,7 +12,8 @@ const Login = ({history, location}) => {
     const submitHandler = async (e) => {
         e.preventDefault()
         await loginUser(username, password)
-        console.log(username, password)
+        history.push('/')
+        window.location.href = '/'
     }
 
     return (

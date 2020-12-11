@@ -1,8 +1,9 @@
 import React, {useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { registerUser } from '../../api/auth'
 
 
-const Register = ({history, location}) => {
+const Register = ({history}) => {
 
     const [firstname, setFirstName] = useState('')
     const [lastname, setLastName] = useState('')
@@ -11,10 +12,13 @@ const Register = ({history, location}) => {
     const [password2, setPassword2] = useState('')
     const [username, setUserName] = useState('')
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
         if(password === password2){
-            console.log(firstname, lastname, email, username, password)
+            const res = await registerUser(firstname, lastname, email, username, password)
+            console.log(res)
+            history.push('/login')
+            window.location.href = '/login'
         }else {
             alert("Passwords do not match")
         }
