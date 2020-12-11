@@ -8,9 +8,27 @@ import Tables from "../screens/Tables";
 import Home from "../screens/Home";
 import { Route } from 'react-router-dom';
 import { logout } from '../../api/auth'
+import axios from 'axios'
+import Products from '../screens/Products'
+
+axios
+    .interceptors
+    .request
+    .use(config => {
+
+        const token = localStorage.getItem('user-token');
+
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`
+        }
+        return config;
+    }, error => {
+        Promise.reject(error)
+    });
 
 
-const DashboardContainer = ({history}) => {
+
+const DashboardContainer = () => {
 
     const logoutHandler = () => {
         logout()
@@ -37,6 +55,7 @@ const DashboardContainer = ({history}) => {
                     
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/tables" component={Tables}/>
+                    <Route exact path="/products" component={Products}/>
                     <Route exact path="/charts" component={Charts}/>
 
                     {/* Different Screens */}

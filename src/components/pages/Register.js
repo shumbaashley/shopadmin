@@ -1,7 +1,8 @@
 import React, {useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { registerUser } from '../../api/auth'
-
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = ({history}) => {
 
@@ -12,15 +13,17 @@ const Register = ({history}) => {
     const [password2, setPassword2] = useState('')
     const [username, setUserName] = useState('')
 
-    const submitHandler = async (e) => {
+    const notify = () => toast.info("User registered successfully");
+
+    const submitHandler = (e) => {
         e.preventDefault()
         if(password === password2){
-            const res = await registerUser(firstname, lastname, email, username, password)
-            console.log(res)
+            registerUser(firstname, lastname, email, username, password)
+            notify()
             history.push('/login')
             window.location.href = '/login'
         }else {
-            alert("Passwords do not match")
+            toast.error("Passwords do not match")
         }
 
     }
@@ -40,7 +43,7 @@ const Register = ({history}) => {
                             <div className="text-center">
                                 <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form className="user" onSubmit={(e) => submitHandler(e)}>
+                            <form className="user" onSubmit={e => submitHandler(e)}>
                                 <div className="form-group row">
                                     <div className="col-sm-6 mb-3 mb-sm-0">
                                         <input onChange={(e) => setFirstName(e.target.value)} type="text" className="form-control form-control-user" id="exampleFirstName"

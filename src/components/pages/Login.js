@@ -1,19 +1,45 @@
 import React, {useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { loginUser } from '../../api/auth'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
+import {apiURL} from '../../api'
 
-
-const Login = ({history, location}) => {
+const Login = ({history}) => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
 
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
-        await loginUser(username, password)
-        history.push('/')
-        window.location.href = '/'
+         
+            const config = {
+                headers : {
+                    "Content-Type" : "application/json"
+                }
+            }
+
+            axios.post(`${apiURL}/users/token/`, {username, password}, config).then( async resp => {
+                localStorage.setItem('user-token', JSON.stringify(resp.data.access))
+                toast.info("Login successful!")
+                history.push('/')
+                window.location.href = '/'
+        
+            })   
+            .catch(err=>{
+
+                console.log(err.message)
+
+                toast.error(err.message);
+                
+                
+            
+
+
+            })
+
+
     }
 
     return (
@@ -27,6 +53,7 @@ const Login = ({history, location}) => {
 
                 <div className="card o-hidden border-0 shadow-lg my-5">
                     <div className="card-body p-0">
+
                         {/* <!-- Nested Row within Card Body --> */}
                         <div className="row">
                             <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
