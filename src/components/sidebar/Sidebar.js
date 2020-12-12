@@ -40,19 +40,40 @@ const Sidebar = () => {
         </div>
 
 
-        {/* <!-- Nav Item - Charts --> */}
-        <li className="nav-item">
-            <Link className="nav-link" to="/charts">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></Link>
-        </li>
 
-        {/* <!-- Nav Item - Tables --> */}
-        <li className="nav-item">
-            <Link className="nav-link" to="/tables">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Tables</span></Link>
-        </li>
+        {/* <!-- Nav Item - Pages Collapse Menu --> */}
+        <li class="nav-item">
+                <Link class="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span>
+                </Link>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Perfomance Charts:</h6>
+                        <Link class="collapse-item" to="/transactions">Transactions</Link>
+                        <Link class="collapse-item" to="/deliveries">Deliveries</Link>
+                    </div>
+                </div>
+            </li>
+
+
+        {/* <!-- Nav Item - Pages Collapse Menu --> */}
+            <li class="nav-item">
+                <Link class="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span>
+                </Link>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Table Listings:</h6>
+                        <Link class="collapse-item" to="/products">Products</Link>
+                        <Link class="collapse-item" to="/shops">Shops</Link>
+                        <Link class="collapse-item" to="/orders">Orders</Link>
+                    </div>
+                </div>
+            </li>
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider d-none d-md-block"/>

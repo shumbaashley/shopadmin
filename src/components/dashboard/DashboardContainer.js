@@ -1,4 +1,4 @@
-import React, { useEffect,  Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import Modal from '../modal/Modal'
@@ -11,6 +11,8 @@ import { logout } from '../../api/auth'
 import axios from 'axios'
 import Products from '../screens/Products'
 import jwtDecode from 'jwt-decode'
+import Shops from '../screens/Shops'
+import Orders from '../screens/Orders'
 
 axios
     .interceptors
@@ -31,13 +33,15 @@ axios
 
 const DashboardContainer = () => {
 
+    const [user, setUser] = useState({})
+
     useEffect(() => {
         const token = localStorage.getItem('user-token');
 
-        const user = jwtDecode(token)
-        
-        console.log(user)
-    }, [])
+        setUser(jwtDecode(token))        
+    
+    }, [user])
+
 
     const logoutHandler = () => {
         logout()
@@ -54,7 +58,7 @@ const DashboardContainer = () => {
             {/* <!-- Main Content --> */}
             <div id="content">
 
-                <Header/>
+                <Header user={user}/>
 
                 {/* <!-- Begin Page Content --> */}
                 <div className="container-fluid">
@@ -66,6 +70,8 @@ const DashboardContainer = () => {
                     <Route exact path="/tables" component={Tables}/>
                     <Route exact path="/products" component={Products}/>
                     <Route exact path="/charts" component={Charts}/>
+                    <Route exact path="/shops" component={Shops}/>
+                    <Route exact path="/orders" component={Orders}/>
 
                     {/* Different Screens */}
                     

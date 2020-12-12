@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({user : {username}}) => {
     return (
         <Fragment>
 {/* <!-- Topbar --> */}
@@ -24,7 +24,7 @@ const Header = () => {
     <li className="nav-item dropdown no-arrow">
         <Link className="nav-link dropdown-toggle" to="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+            <span className="mr-2 d-none d-lg-inline text-gray-600 small">{username}</span>
             <img className="img-profile rounded-circle" alt="" src="img/undraw_profile.svg"/>
         </Link>
         {/* <!-- Dropdown - User Information --> */}
