@@ -13,21 +13,21 @@ const Sidebar = () => {
         <ul className={`navbar-nav bg-gradient-primary sidebar ${toggle}  sidebar-dark accordion`} id="accordionSidebar">
 
         {/* <!-- Sidebar - Brand --> */}
-        <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
             <div className="sidebar-brand-icon rotate-n-15">
                 <i className="fas fa-laugh-wink"></i>
             </div>
             <div className="sidebar-brand-text mx-3">Shop Admin </div>
-        </a>
+        </Link>
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider my-0"/>
 
         {/* <!-- Nav Item - Dashboard --> */}
         <li className="nav-item active">
-            <a className="nav-link" href="index.html">
+            <Link className="nav-link" to="/">
                 <i className="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+                <span>Dashboard</span></Link> 
         </li>
 
 
@@ -43,12 +43,12 @@ const Sidebar = () => {
 
         {/* <!-- Nav Item - Pages Collapse Menu --> */}
         <li class="nav-item">
-                <Link class="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <Link class="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span>
                 </Link>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Perfomance Charts:</h6>
                         <Link class="collapse-item" to="/transactions">Transactions</Link>
