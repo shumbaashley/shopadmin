@@ -7,7 +7,7 @@ import {apiURL} from '../../api'
 
 const Login = ({history}) => {
 
-    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
 
@@ -20,12 +20,11 @@ const Login = ({history}) => {
                 }
             }
 
-            axios.post(`${apiURL}/users/token/`, {username, password}, config).then( async resp => {
-                localStorage.setItem('user-token', JSON.stringify(resp.data.access))
+            axios.post(`${apiURL}/auth/login`, {email, password}, config).then( async resp => {
+                localStorage.setItem('user-token', JSON.stringify(resp.data.token))
                 toast.info("Login successful!")
                 history.push('/')
                 window.location.href = '/'
-        
             })   
             .catch(err=>{
 
@@ -64,9 +63,9 @@ const Login = ({history}) => {
                                     </div>
                                     <form className="user" onSubmit={(e) => submitHandler(e)}>
                                         <div className="form-group">
-                                            <input onChange={(e) => setUsername(e.target.value)} type="text" className="form-control form-control-user"
+                                            <input onChange={(e) => setEmail(e.target.value)} type="text" className="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Username..." required/>
+                                                placeholder="Email" required/>
                                         </div>
                                         <div className="form-group">
                                             <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control form-control-user"

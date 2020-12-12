@@ -1,4 +1,4 @@
-import React, {  Fragment } from 'react'
+import React, { useEffect,  Fragment } from 'react'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import Modal from '../modal/Modal'
@@ -10,6 +10,7 @@ import { Route } from 'react-router-dom';
 import { logout } from '../../api/auth'
 import axios from 'axios'
 import Products from '../screens/Products'
+import jwtDecode from 'jwt-decode'
 
 axios
     .interceptors
@@ -19,7 +20,7 @@ axios
         const token = localStorage.getItem('user-token');
 
         if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`
+            config.headers['token'] = `${token}`
         }
         return config;
     }, error => {
@@ -29,6 +30,14 @@ axios
 
 
 const DashboardContainer = () => {
+
+    useEffect(() => {
+        const token = localStorage.getItem('user-token');
+
+        const user = jwtDecode(token)
+        
+        console.log(user)
+    }, [])
 
     const logoutHandler = () => {
         logout()

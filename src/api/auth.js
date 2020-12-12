@@ -11,7 +11,7 @@ export const registerUser = async (first_name, lastname, username, email, passwo
             }
         }
         
-        const {data} = await axios.post(`${apiURL}/users/register/`, {first_name, lastname, username, email, password}, config)
+        const {data} = await axios.post(`${apiURL}/auth/register/`, {first_name, lastname, username, email, password}, config)
         
         console.log(data)
         return data

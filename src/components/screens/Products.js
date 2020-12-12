@@ -1,14 +1,16 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {apiURL} from '../../api'
 import axios from 'axios'
+import Loader from '../loader/Loader'
 
 const Products = () => {
 
+    const [products, setProducts] = useState([])
     useEffect(() => {
         const fetchProducts = async () => {
-            const products = await axios.get(`${apiURL}/products/`)
-            console.log(products)
+            const {data} = await axios.get(`${apiURL}/products/`)
+            setProducts(data)
         }
         fetchProducts()
     }, [])
@@ -26,6 +28,7 @@ const Products = () => {
                             <h6 className="m-0 font-weight-bold text-primary">Products List</h6>
                         </div>
                         <div className="card-body">
+                        {products.length > 0 ? (
                             <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -38,17 +41,22 @@ const Products = () => {
                                         </tr>
                                     </thead>                                    
                                     <tbody>
+                                    { products.map(product => (
+                                      
+                                            <tr>
+                                                <td>{product.name}</td>
+                                                <td>{product.shop}</td>
+                                                <td>{product.category}</td>
+                                                <td>{product.image}</td>
+                                                <td>{product.price}</td>
+                                            </tr>
+                                        ))
+                                    }                                       
                                         
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
+                             ): <Loader/>}
                         </div>
                     </div>
     </Fragment>
